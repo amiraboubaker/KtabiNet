@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}About
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('assets/styles/about.css') }}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700display=swap">
+	<link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+{% endblock %}
+
+{% block body %}
+	<style>
+		body,
+		footer {
+			font-family: 'Poppins', sans-serif;
+		}
+		.custom-navbar {
+			background-color: #a5774a;
+		}
+	</style>
+	<br><br><br>
+	<section id="about" class="about-section">
+		<div class="row">
+			<div class="col-md-6">
+				<br><br>
+				<h1 class="card-title" style="text-align:center;">About Us</h1>
+				<br>
+				<div class="card-body">
+					<div class="about-text mt-1">
+						<p class="paragraph">
+							Notre application web révolutionnaire va au-delà de la simple vente de livres en offrant une expérience interactive inégalée.
+																																																																						Découvrez KtabiNet, votre destination en ligne ultime pour vendre et explorer des livres et des livres PDF de toutes sortes !
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><hr><br>
+
+		<div class="">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card bg-light">
+						<div class="card-body">
+							<h1 class="card-title">
+								📚 Bienvenue sur KtabiNet - Votre Destination Littéraire Complète! 🌟
+							</h1>
+							<div class="about-text mt-4">
+								<p class="paragraph">
+									Découvrez une expérience de lecture inégalée avec KtabiNet - bien plus qu'une simple librairie en ligne, c'est un monde littéraire où vos rêves de lecture prennent vie!
+								</p>
+							</div>
+						</div>
+					</div>
+					<br><br>
+					<div class="card bg-light">
+						<div class="card-body">
+							<h1 class="card-title">
+								🔍 Explorez une Bibliothèque Numérique Étendue :
+							</h1>
+							<div class="about-text mt-4">
+								<p class="paragraph">
+									Parcourez nos rayons virtuels regorgeant de trésors littéraires, des classiques intemporels aux best-sellers contemporains. Quel que soit votre genre de prédilection, trouvez votre bonheur sur KtabiNet!
+								</p>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="card bg-light">
+						<div class="card-body">
+							<h1 class="card-title">
+								📖 Une Plateforme Intuitive pour les Lecteurs Passionnés
+							</h1>
+							<div class="about-text mt-4">
+								<p class="paragraph">
+									Que vous soyez un lecteur chevronné ou que vous découvriez le plaisir de la lecture, KtabiNet vous accompagne à chaque étape de votre parcours littéraire.
+																																																																																																																																																																																																																																																																																																														Notre application est conçue pour être simple et intuitive, offrant une navigation fluide et une interface conviviale.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<img src="{{ asset('/assets/images/Robot.jpeg') }}" alt="About" class="img-fluid">
+				</div>
+			</div>
+		</div>
+	</section>
+	<hr>
+	<br><br>
+	<div class="">
+		<div class="row">
+			<div class="col-md-4 d-flex flex-column align-items-center">
+				<img src="{{ asset('assets/images/picture1.jpeg') }}" alt="Team Image" class="img-fluid mb-3">
+				<img src="{{ asset('assets/images/picture2.jpeg') }}" alt="Team Image" class="img-fluid mb-3">
+			</div>
+			<div class="col-md-8">
+				<div class="card bg-white mt-md-0 mt-3">
+					<div class="card-body">
+						<div class="about-text mt-4">
+							<p class="paragraph">L'équipe derrière l'application KtabiNet a uni ses compétences diverses pour créer une plateforme innovante qui révolutionne l'expérience de lecture.</p>
+							<p>En combinant expertise en développement logiciel, design intuitif et connaissances linguistiques, nous avons conçu une application tout-en-un qui répond aux besoins variés des lecteurs passionnés.</p>
+							<div class="col-md-10 d-flex align-items-start">
+								<img src="{{ asset('assets/images/picture3.jpeg') }}" alt="Team Image" class="img-fluid">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div><hr><section id="services" class="services">
+	<div class="">
+		<h1 style="text-align:center;">Services</h1>
+		<section id="services" class="services">
+			{% for service in services %}
+				<div class="card">
+					<img src="{{ asset('assets/images/' ~ service.image) }}" class="card-img-top" alt="{{ service.name }}">
+					<div class="card-body">
+						<h5 class="card-title">Service
+							{{ loop.index }}:
+							{{ service.name }}</h5>
+						<p class="card-text">{{ service.description }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</section>
+	</div>
+</section><hr><section id="team" class="team-members">
+	<div class="">
+		<h1 style="text-align:center;">Team Members</h1>
+		<section id="team" class="team-members">
+			{% for member in teamMembers %}
+				<div class="card">
+					<img src="{{ asset('assets/images/' ~ member.image) }}" class="card-img-top" alt="{{ member.name }}">
+					<div class="card-body">
+						<h5 class="card-title">{{ member.name }}</h5>
+						<p class="card-text">{{ member.position }}</p>
+						<p class="card-text">{{ member.email }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</section>
+	</div>
+</section><br><br>{% endblock %}{% block footer %}
+<footer>
+	<div class="">
+		<div class="row">
+			<div class="col-md-4">
+				<br>
+				<h5>Contact</h5>
+				<br>
+				<p>Adresse : 123 Rue de l'Exemple, Ville, Pays</p>
+				<p>Téléphone : +1234567890</p>
+				<p>Email : info@example.com</p>
+			</div>
+			<div class="col-md-12 text-md-right">
+				<a href="#" class="social-icon">
+					<i class="fab fa-facebook"></i>
+				</a>
+				<a href="#" class="social-icon">
+					<i class="fab fa-twitter"></i>
+				</a>
+				<a href="#" class="social-icon">
+					<i class="fab fa-instagram"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</footer>{% endblock %}{% block javascripts %}
+{{ parent() }} <script src="{{ asset('assets/scripts/about.js') }}"></script>
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>{% endblock %}

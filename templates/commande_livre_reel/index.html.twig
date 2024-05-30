@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandeLivreReelController!{% endblock %}
+
+{% block body %}
+
+{% block stylesheets %}
+    {# <link rel="stylesheet" href="{{ asset('styles/index.css') }}">  #}
+    <script src="https://cdn.tailwindcss.com"></script>
+{% endblock %}
+
+<div class="container-sm mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Available</th>
+                            <th scope="col" class="text-center">Quantity</th>
+                            <th scope="col" class="text-right">Price</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart %}
+                            {% set itemTotalPrice = item.quantity * item.price %}
+                            <tr>
+                                <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                                <td>{{ item.title }}</td>
+                                <td>In stock</td>
+                                <td>{{ item.quantity }}</td>
+                                <td class="text-right">{{ item.price }}</td>
+                                <td class="text-right">
+                                    <a href="{{ path('app_commande_livre_reel_delete', {'id': item.id}) }}" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% set totalPrice = 0 %}
+                        {% for item in cart %}
+                            {% set itemTotalPrice = item.quantity * item.price %}
+                            {% set totalPrice = totalPrice + itemTotalPrice %}
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Sub-Total</td>
+                            <td class="text-right">{{ totalPrice }}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Shipping</td>
+                            <td class="text-right">6 dt</td>
+                        </tr>
+                        {% set totalPrice = totalPrice + 6 %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Total</strong></td>
+                            <td class="text-right"><strong>{{ totalPrice }} dt</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <button class="btn btn-block btn-light"><a href="{{ path('app_mes_livres_reel') }}" class="link">Continue Shopping</a></button>
+                </div>
+                <div hidden class="col-sm-12 col-md-6 text-right">
+                
+                    <form  action="{{ path('app_checkout') }}" method="post">
+                        <button type="submit" class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                    </form>
+                    </div>
+                    <div>
+                    <form action="{{ path('app_checkout') }}" method="post">
+                        <button type="submit" class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

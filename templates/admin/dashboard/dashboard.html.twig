@@ -1,0 +1,134 @@
+{% extends "./adminbase.html.twig" %}
+
+
+{% block mainContent %}
+
+
+
+
+
+	<div style="overflow: auto; height:93vh ;padding: 0 50px; width: 100%;">		
+		{# Cards---------------------------------------------------------------------- #}
+		{# Cards---------------------------------------------------------------------- #}
+		<div class="content  mt-5 mb-4" > 
+			<div
+				class="content" style="display: flex; justify-content: space-between;  height: 100px; color: whiteSmoke; font-size: 18px; border-radius: 15px;">
+				<!-- Contenu de la row -->
+
+
+				<div class="col-2 bg-primary ml-5 pt-3" style="border-radius: 5px;">
+					<p style="font-weight: bolder; margin-bottom: 0; padding-left:10px;">Nombre de livre pdf:</p>
+					<hr style="height: 3px; margin: 5px 10px;">
+					<p class="text-center" style="font-weight:bold; font-size:20px;" id="lp">40d4</p>
+				</div>
+				<div class="col-2 bg-success pt-3" style="border-radius: 5px;">
+					<p style="font-weight: bolder; margin-bottom: 0; padding-left:10px;" >Nombre de livre reel:</p>
+					<hr style="height: 3px; margin: 5px 10px;">
+					<p class="text-center" style="font-weight:bold; font-size:20px;" id="lr">500</p>
+				</div>
+				<div class="col-2 bg-warning pt-3" style="border-radius: 5px;">
+					<p style="font-weight: bolder; margin-bottom: 0; padding-left:10px;" >Nombre de commande:</p>
+					<hr style="height: 3px; margin: 5px 10px;">
+					<p class="text-center" style="font-weight:bold; font-size:20px;" id="lcomm">403</p>
+				</div>
+				<div class="col-2 bg-danger pt-3" style="border-radius: 5px;">
+					<p style="font-weight: bolder; margin-bottom: 0; padding-left:10px;" >Nombre de client:</p>
+					<hr style="height: 3px; margin: 5px 10px;">
+					<p class="text-center" style="font-weight:bold; font-size:20px;" id="lclient">401</p>
+				</div>
+			</div>
+		</div>
+		
+
+		{# Charts---------------------------------------------------------------------- #}
+		{# Charts---------------------------------------------------------------------- #}
+
+
+
+		<div class="content mt-5"  id="myChartContainer" data-chart-data="{{ data | json_encode | e }}">
+		{# Linge 1 #}
+			<div class="row">
+				{# Charte 1 #}
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header text-center" style="font-weight: bolder;">
+							Flous / Mois
+						</div>
+						<div class="card-body">
+							<canvas id="myChart1"></canvas>
+						</div>
+					</div>
+				</div>
+			    {# Charte 2 #}
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header text-center" style="font-weight: bolder;">
+							Commande / Mois
+						</div>
+						<div class="card-body">
+							<canvas id="myChart2"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row mt-4">
+				{# Charte 1 #}
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header text-center" style="font-weight: bolder;">
+							Flous / Mois
+						</div>
+						<div class="card-body">
+							<canvas id="myChart3"></canvas>
+						</div>
+					</div>
+				</div>
+			    {# Charte 2 #}
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header text-center" style="font-weight: bolder;">
+							Commande / Mois
+						</div>
+						<div class="card-body">
+							<canvas id="myChart4"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	 
+	 {# Linge 3 #}
+		<div class="row mt-4" style="max-height:100vh">
+		{# left side #}
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header text-center" style="font-weight: bolder;">
+					Livre PDF/ Catégorie
+					</div>
+					<div class="card-body">
+						<canvas id="myChart5"></canvas>
+					</div>
+				</div>
+			</div>
+			
+			{# right side #}
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header text-center" style="font-weight: bolder;">
+					Livre reel/ Catégorie
+					</div>
+					<div class="card-body">
+						<canvas id="myChart6"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}

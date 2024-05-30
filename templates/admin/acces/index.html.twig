@@ -1,0 +1,63 @@
+{% extends 'AdminBase.html.twig' %}
+
+{% block title %}Liste des accès
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+{% block mainContent %}
+	<div class="container mt-4" style="overflow: auto; height:89vh; width: 100%;">
+		<h1>Liste des accès</h1>
+		<br>
+		<table class="table table-hover" id="example">
+			<thead>
+				<tr>
+					<th scope="col" class="col-1">ID Accès</th>
+					<th scope="col" class="col-1">Date</th>
+					<th scope="col" class="col-1">Accès Autorisé</th>
+					<th scope="col" class="col-1">ID Client</th>
+					<th scope="col" class="col-1">ID Livre PDF</th>
+					<th scope="col" class="col-1">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if accesList is empty %}
+					<tr>
+						<td colspan="6">Aucun enregistrement trouvé</td>
+					</tr>
+				{% else %}
+					{% for accesItem in accesList %}
+						<tr>
+							<td>{{ accesItem.id }}</td>
+							<td>{{ accesItem.Date ? accesItem.Date|date('Y-m-d') : '' }}</td>
+							<td>{{ accesItem.Acces ? 'Oui' : 'Non' }}</td>
+							<td>{{ accesItem.IdClient.id }}</td>
+							<td>
+								{% if accesItem.IdLivrePdf is not null %}
+									{{ accesItem.IdLivrePdf.id }}
+								{% else %}
+									N/A
+								{% endif %}
+							</td>
+							<td>
+								<a href="{{ path('app_acces_edit', {'id': accesItem.id}) }}" class="btn btn-primary">
+									<i class="fas fa-pencil-alt"></i>
+									<span class="sr-only">Modifier</span>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+
+	 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+	 <script>
+	        $(document).ready(function() {
+	            $('#example').DataTable();
+	        });
+	    </script>
+{% endblock %}

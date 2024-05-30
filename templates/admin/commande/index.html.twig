@@ -1,0 +1,64 @@
+{% extends "./AdminBase.html.twig" %}
+
+{% block title %}Liste de commandes
+{% endblock %}
+
+{% block mainContent %}
+	<div class="container mt-4" style="overflow: auto; height:89vh ; width: 100%;">
+		<h1>Liste de commandes</h1>
+		<br>
+		<table class="table table-hover" id="example">
+			<thead>
+				<tr>
+					<th scope="col" class="col-1">IDCommande</th>
+					<th scope="col" class="col-1">DateCommande</th>
+					<th scope="col" class="col-1">IDClient</th>
+					<th scope="col" class="col-1">NomClient</th>
+					<th scope="col" class="col-1">PrénomClient</th>
+					<th scope="col" class="col-1">NbreLivres</th>
+					<th scope="col" class="col-1">PrixTotal</th>
+					<th scope="col" class="col-1">Etat</th>
+					<th scope="col" class="col-1">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if commandes is empty %}
+					<tr>
+						<td colspan="8">Aucun enregistrement trouvé</td>
+					</tr>
+				{% else %}
+					{% for commande in commandes %}
+						<tr>
+							<td>{{ commande.id }}</td>
+							<td>{{ commande.DateCommande ? commande.DateCommande|date('Y-m-d') : '' }}</td>
+							<td>{{ commande.idClient.id }}</td>
+							<td>{{ commande.idClient.NomClient }}</td>
+							<td>{{ commande.idClient.PrenomClient }}</td>
+							<td>{{ commande.NbreLivres }}</td>
+							<td>{{ commande.prixTotal }}</td>
+							<td>{{ commande.etat }}</td>
+							<td>
+								<div class="btn-group" role="group" aria-label="Actions">
+									<a href="{{ path('app_commande_edit', {'id': commande.id}) }}" class="btn btn-primary">
+										<i class="fas fa-pencil-alt"></i>
+										<span class="sr-only">Modifier</span>
+									</a>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+
+	 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+	 <script>
+			  $(document).ready(function() {
+			    $('#example').DataTable();
+			  });
+			</script>
+
+{% endblock %}

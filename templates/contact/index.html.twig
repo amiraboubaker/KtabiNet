@@ -1,0 +1,49 @@
+{% extends "./clientBase.html.twig" %}
+
+{% block title %}Page Contact{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            background-color: #f0f8ff; /* Bleu clair */
+            font-family: Arial, sans-serif;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="card">
+        <h1>Page Contact</h1>
+        
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+        {% endfor %}
+        
+        <form class="mt-4" method="post">
+            {{ form(form) }}
+        </form>
+    </div>
+</div>
+{% endblock %}
+

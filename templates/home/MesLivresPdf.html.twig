@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MesLivresReelController!{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('app.css') }}"> {# Link to your specific CSS file #}
+{% endblock %}
+
+
+{% block body %}
+
+<section class="py-5">
+  <div class=" px-4 px-lg-5 mt-5">
+    <div class="row">
+      {% for product in livres_pdf %}
+      <div class="col-md-2 mb-5">
+        <a href="{{ path('app_LivrePdf', {'id': product.id}) }}" class="text-decoration-none">
+          <div class="card h-100">
+            <img class="card-img-top" src="{{ product.urlImage }}" alt="{{ product.titre }}">
+            <div class="card-body p-4">
+              <div class="text-center">
+                <h5 class="fw-bolder">{{ product.titre }}</h5>
+                {{ product.prix }} DT
+              </div>
+            </div>
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center">
+                <a class="btn btn-outline-dark mt-auto" href="{{ path('app_LivrePdf', {'id': product.id}) }}">View options</a>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

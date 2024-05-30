@@ -1,0 +1,33 @@
+{% extends "./AdminBase.html.twig" %}
+
+{% block title %} Détails du Livre REEL {% endblock %}
+
+{% block mainContent %}
+<div class="d-flex justify-content-center align-items-center mt-5" style="width: 1000px; height: 650px;">
+    <div class="card" style="width: 200%;"> <!-- Ajustez la largeur selon vos besoins -->
+        <div class="card-body">
+            <h1 class="card-title">{{ livreReel.titre }}</h1> 
+            <h5 class="card-title">Titre de la carte</h5>
+            <p class="card-title"><strong>Auteur :</strong> {{ livreReel.auteur }}</p>
+            <p class="card-title" ><strong>Prix :</strong> {{ livreReel.prix }}</p>
+            <p class="card-text"><strong>Catégorie :</strong> {{ livreReel.categorie }}</p>
+            <p class="card-text"><strong>Description :</strong> {{ livreReel.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <p><strong>Nombre de Pages :</strong> {{ livreReel.nbrPage }}</p>
+            <p class="list-group-item"><strong>Solde :</strong> {{ livreReel.solde }}</p>
+            <p class="list-group-item" ><strong>Date de Publication :</strong> {{ livreReel.datePublication|date('Y-m-d') }}</p>
+        </ul>
+        
+        <div class="card-body" style="background:#E5E5E5;" >
+            <p class="card-link"><strong>Langue :</strong> {{ livreReel.langue }}</p>
+            <p class="card-link"><strong>Stock :</strong> {{ livreReel.stock }}</p>
+            <p><a href="{{ path('livreREEL') }}"  class="btn btn-outline-secondary mb-4">retour livre REEL</a></p>
+        </div>
+    </div>
+    <hr style="height: 100px; border: none; border-right: 90px solid #ccc; margin: 0;">
+    <div>
+        <img src="{{ livreReel.getImageUrl() }}" style="max-width: 100%; height: auto;">
+    </div>
+</div>
+{% endblock %}

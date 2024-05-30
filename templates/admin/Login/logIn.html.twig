@@ -1,0 +1,49 @@
+
+
+    <div class="container" style="display:flex; flex-direction: justify-content; width:100%; height: 80vh; align-items: center;">
+    <div class="card mt-10" style="margin-top:20px">
+
+        <h1 class="mt-5" style="text-align:center">Login Admin</h1>
+        <div class="container mt-5">
+        {% if error %}
+			<div class="alert alert-danger">{{ error }}</div>
+		{% endif %}
+            {{ form_start(form, {'attr': {'class': 'row g-3 justify-content-center'}}) }}
+
+
+
+
+
+
+
+            <div class="col-md-10 mt-2">
+                {{ form_row(form.email) }}
+            </div>
+
+
+
+
+            <div class="form-group col-md-10 mt-2">
+                {{ form_label(form.password, 'Mot de passe') }}
+                {{ form_widget(form.password, {'attr': {'class': 'form-control bg-trasparent block border-secondary border-b-2 w-full h-20 text-6xl ouline-none'}}) }}
+            </div>
+
+       
+            
+
+
+         
+
+            {# Les autres champs du formulaire ici... #}
+
+            <div class="col-10 d-flex justify-content-end mb-3">
+                {{ form_row(form.LogIn) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+
+</div>
+    
+
+

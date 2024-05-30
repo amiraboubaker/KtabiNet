@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MesLivresReelController!{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('app.css') }}"> {# Link to your specific CSS file #}
+{% endblock %}
+
+
+{% block body %}
+
+<style> 
+        /* The heart of the matter */ 
+          
+        .horizontal-scrollable > .row { 
+            overflow-x: auto; 
+            white-space: nowrap; 
+        } 
+          
+        .horizontal-scrollable > .row > .col-xs-4 { 
+            display: inline-block; 
+            float: none; 
+        } 
+        /* Decorations */ 
+          
+        .col-xs-4 { 
+            color: white; 
+            font-size: 24px; 
+            padding-bottom: 20px; 
+            padding-top: 18px; 
+        } 
+          
+        .col-xs-4:nth-child(2n+1) { 
+            background: green; 
+        } 
+          
+        .col-xs-4:nth-child(2n+2) { 
+            background: black; 
+        } 
+    </style>
+
+<section class="py-5 ">
+  
+  <div class="px-4 px-lg-5 mt-5 " >
+        <div class="search-bar mb-3">
+        <div hidden>
+          <form action="{{ path('search_route') }}" method="GET" >
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+          </form>
+      </div>
+      <form action="{{ path('search_route') }}" method="GET">
+        <input type="text" name="query" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+  </div>
+    <div class="row flex-nowrap overflow-auto ">
+      {% for product in livres_reel %}
+      <div class="col mb-5 ">
+        <a href="{{ path('app_LivreReel', {'id': product.id}) }}">
+          <div class="card h-100">
+            <img class="card-img-top" src="{{ product.imageurl }}" alt="">
+            <div class="card-body p-4">
+              <div class="text-center">
+                <h5 class="fw-bolder">{{ product.titre }}</h5>
+                {{ product.prix }} DT
+              </div>
+            </div>
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('app_LivreReel', {'id': product.id}) }}">see details</a></div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

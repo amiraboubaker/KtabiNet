@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Accueil
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+
+		<link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/tablestyle.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/formstyle.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/styles/editProfilAdmin.css') }}">
+		<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap5.css">
+	</head>
+	<body>
+
+		<div class="container-fluid" style="height: 93vh;">
+			<div
+				class="row" style="height: 93vh;">
+				{# NavBar Content #}
+				{% block mainNav %}
+					<nav class=" navbar navbar-expand-lg lighten-1 navbar-dark bg-dark " style="height: 7vh; width:100%; padding:0 30px;">
+						<a class="navbar-brand " href="#">KtabiNet</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555" aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent-555">
+							<div class="bg-dark ">
+								<button type="button" class="btn bg-dark " data-bs-toggle="dropdown">
+									<i class="fa-solid fa-user fa-2xl" style="color: #ffffff;"></i>
+								</button>
+								<ul class="dropdown-menu custom-dropdown-menut mr-2" style="right: 30px; left: auto;">
+									<li>
+										{# A verifier avec Khawlaa #}
+										<button class="dropdown-item" type="button">
+											<a href="/admin/edit/{{ app.user.id }}" style="text-decoration: none; color:black;">
+												Modifier profile</a>
+										</button>
+										{# <button class="dropdown-item" type="button"><a href="/admin/edit/{{ app.user.id }}"  style="text-decoration: none; color:black;"> Modifier profile</a></button> #}
+									</li>
+
+									<li>
+										<button class="dropdown-item" type="button">
+											<a href="/add/admin" style="text-decoration: none; color:black;">Ajouter Admin</a>
+										</button>
+									</li>
+									<hr>
+									<li>
+										<a href="{{ path('app_logout') }}">
+											<button class="dropdown-item" type="button">Deconnexion</button>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				{% endblock %}
+
+				{% block navbar %}
+					<nav class=" d-none d-md-block sidebar " style="height: 93vh; width: 13%; background-color: #2d2d2d;">
+
+
+						<div class="space" style="height: 10vh;"></div>
+
+
+						<div class="sidebar-sticky">
+							<ul class="nav flex-column" style="font-size:20px">
+								<li class="nav-item mt-3">
+									<a class="nav-link active text-white " href="/admin/stock/livre/livreREEL">
+
+										<i class="fa-solid fa-bars"></i>
+										&nbsp;
+																																								Liste livre
+									</a>
+								</li>
+								<li class="nav-item mt-3">
+									<a class="nav-link text-white" href="/admin/stock/livre/ajouterREEL">
+										<i class="fa-solid fa-plus"></i>
+										&nbsp;
+																																								Ajouter livre
+									</a>
+								</li>
+								<li class="nav-item mt-3">
+									<a class="nav-link text-white" href="/admin/commande">
+										<i class="fa-solid fa-bars"></i>
+										&nbsp;
+																																								Liste commande
+									</a>
+								</li>
+								<li class="nav-item mt-3">
+									<a class="nav-link text-white" href="/admin/client">
+										<i class="fa-solid fa-bars"></i>
+										&nbsp;
+																																								Liste clients
+									</a>
+								</li>
+								<li class="nav-item mt-3">
+									<a class="nav-link text-white" href="/admin/acces">
+										<i class="fa-solid fa-bars"></i>
+										&nbsp;
+																																								Liste acces
+									</a>
+								</li>
+
+
+								<hr>
+								<li class="nav-item">
+									<a class="nav-link text-white" href="/admin/dashboard">
+										<i class="fa-solid fa-chart-line"></i>
+										&nbsp;
+																														Dashboard
+									</a>
+								</li>
+								<li class="nav-item mt-3">
+									<a class="nav-link text-white" href="/admin/client">
+										<i class="fa-solid fa-users"></i>
+										&nbsp;
+																				Gérer utilisateurs
+									</a>
+								</li>
+								<li class="nav-item mt-3">
+									<a class="nav-link text-white" href="#"></a>
+								</li>
+							</ul>
+						</div>
+
+					</nav>
+				{% endblock %}
+
+				{# Page Content #}
+				{% block main %}
+
+
+					<div class="column" style="height: 93vh; width:87%;">
+
+
+						<main role="main" style="height: 90vh; width:100%; ">
+							<div class="content " style="width:100%;">
+								{% block mainContent %}{% endblock %}
+							</div>
+						</main>
+					</div>
+
+				{% endblock %}
+			</div>
+		</div>
+		{% block body %}{% endblock %}
+
+
+		 <script src="https://kit.fontawesome.com/3220ca98b3.js" crossorigin="anonymous"></script>
+	{# <header>
+									</header>
+							
+										<main class="container mt-5">{% block body %}{% endblock %} </main>
+							 #}
+		<!-- jQuery -->
+		 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+		<!-- Popper.js -->
+		 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+		<!-- Bootstrap JavaScript -->
+		 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+		 <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+		 <script src="https://cdn.datatables.net/2.0.0/js/jquery.dataTables.min.js"></script>
+		 <script defer src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+		 <script defer src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+		 <script defer src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap5.js"></script>
+
+		 <script src="{{ asset('assets/Charts.js') }}"></script>
+	</body>
+</html>

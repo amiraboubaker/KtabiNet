@@ -1,0 +1,48 @@
+{% extends "./AdminBase.html.twig" %}
+
+{% block title %} Détails du Livre PDF{% endblock %}
+
+
+
+{% block   navbar %}
+  
+{% endblock %}
+    
+
+{% block mainContent %}
+<div class="container">
+    <div>
+        <div>
+            <div>
+                <div>
+                    <h1>{{ livrePDF.titre }}</h1>
+                    <h5>Titre de la carte</h5>
+                </div>
+                <div>
+                    <p><strong>Auteur :</strong> {{ livrePDF.auteur }}</p>
+                    <p><strong>Prix :</strong> {{ livrePDF.prix }}</p>
+                    <p><strong>Catégorie :</strong> {{ livrePDF.categorie }}</p>
+                    <p><strong>Description :</strong> {{ livrePDF.description }}</p>
+                </div>
+                <ul>
+                    <li><strong>Nombre de Pages :</strong> {{ livrePDF.nbrPage }}</li>
+                    <li><strong>Solde :</strong> {{ livrePDF.solde }}</li>
+                    <li><strong>Date de Publication :</strong> {{ livrePDF.datePublication|date('Y-m-d') }}</li>
+                </ul>
+                <div>
+                    <p><strong>Langue :</strong> {{ livrePDF.langue }}</p>
+                    <p><strong>URL PDF :</strong> {{ livrePDF.urlPdf }}</p>
+                    <a href="{{ path('livrePDF') }}">Retour Livre PDF</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    <img src="{{ livrePDF.getUrlImage() }}" class="img-fluid" alt="{{ livrePDF.titre }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

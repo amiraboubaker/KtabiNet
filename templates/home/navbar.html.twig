@@ -1,0 +1,38 @@
+<link
+rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+ <script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="container">
+	<div class="logo">KtabiNet</div>
+
+	<div class="nav">
+		<a href="{{ path('app_home') }}" class="nav-link">Homepage</a>
+		<a href="{{ path('app_chatbot') }}" class="nav-link">ChatBot</a>
+		<a href="{{ path('app_mes_livres_reel') }}" class="nav-link">Livres Réel</a>
+		<a href="{{ path('app_mes_livres_pdf') }}" class="nav-link">Livres PDF</a>
+		<a href="{{ path('app_about') }}" class="nav-link">about</a>
+		<a href="{{ path('app_contact') }}" class="nav-link">contact</a>
+
+	</form>
+	{% if app.user %}
+		<form class="d-flex">
+			<button class="btn btn-outline-dark" type="submit">
+				<i class="fas fa-shopping-cart"></i>
+				<a href="{{ path('app_commande_livre_reel') }}" class="">
+					Cart</a>
+				<span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+			</button>
+		{% else %}
+			<a href="{{ path('app_register') }}" class="nav-link">Register</a>
+
+		{% endif %}
+		{% if app.user %}
+			<a href="/lire_livre/{{app.user.id}}" class="nav-link">Mes Livres</a>
+			<a href="{{ path('app_logout') }}" class="nav-link">Logout</a>
+		{% else %}
+			<a href="{{ path('app_login') }}" class="nav-link">Login</a>
+		{% endif %}
+	</div>
+</div>

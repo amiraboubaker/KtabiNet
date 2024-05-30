@@ -1,0 +1,113 @@
+{% extends "./AdminBase.html.twig" %}
+{% block mainContent %}
+ <h2 style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center; color: purple;">Ajouter Livre PDF</h2>
+
+	<div class="card mt-4 p-5"  style="overflow: auto; height:90vh ; width: 80%; padding: 50px; margin: 250px 10% ;">
+
+		{{ form_start(form) }}
+		<div class="form-group">
+			{{ form_label(form.Titre) }}
+			{{ form_widget(form.Titre, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.Titre) %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.Titre) }}
+                </div>
+            {% endif %}
+		</div>
+        <div class="form-group">
+			{{ form_label(form.Auteur) }}
+			{{ form_widget(form.Auteur, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.Auteur) %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.Auteur) }}
+                </div>
+            {% endif %}
+		</div>
+        <div class="form-group">
+			{{ form_label(form.Prix) }}
+			{{ form_widget(form.Prix, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.Prix) %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.Prix) }}
+                </div>
+            {% endif %}
+		</div>
+        <div class="form-group">
+			{{ form_label(form.Description) }}
+			{{ form_widget(form.Description, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.Description) %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.Description) }}
+                </div>
+            {% endif %}
+		</div>
+        <div class="form-group">
+			{{ form_label(form.Categorie) }}
+			{{ form_widget(form.Categorie, {'attr': {'class': 'form-control '}}) }}
+			<a href="{{ path('newcategory') }}" class="btn btn-info btn-sm mt-4 text-right">Ajouter catégorie
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
+       <path d="M3 2v4.586l7 7L14.586 9l-7-7zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586z"/>
+       <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1z"/>
+        </svg>
+        </a>
+			{% if form_errors(form.Categorie) %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.Categorie) }}
+                </div>
+            {% endif %}
+		</div>
+        <div class="form-group mt-5">
+			{{ form_label(form.NbrPage) }}
+			{{ form_widget(form.NbrPage, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.NbrPage) %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.NbrPage) }}
+                </div>
+            {% endif %}
+		</div>
+        <div class="form-group">
+			{{ form_label(form.Solde) }}
+			{{ form_widget(form.Solde, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.Solde) %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.Solde) }}
+                </div>
+            {% endif %}
+		</div>
+        <div class="form-group">
+            {{ form_label(form.DatePublication) }}
+            {{ form_widget(form.DatePublication, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+			{{ form_label(form.langue) }}
+			{{ form_widget(form.langue, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.langue) and form_errors(form.langue)|filter(e => e.message != "This value should be of type float.")|filter(e => e.message != "This value should be of type integer.") %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.langue) }}
+                </div>
+            {% endif %}
+		</div>
+         <div class="form-group">
+			{{ form_label(form.UrlPdf) }}
+			{{ form_widget(form.UrlPdf, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.UrlPdf) and form_errors(form.UrlPdf)|filter(e => e.message != "This value should be of type float.")|filter(e => e.message != "This value should be of type integer.") %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.UrlPdf) }}
+                </div>
+            {% endif %}
+		</div>
+        <div class="form-group">
+			{{ form_label(form.UrlImage) }}
+			{{ form_widget(form.UrlImage, {'attr': {'class': 'form-control '}}) }}
+			{% if form_errors(form.UrlImage) and form_errors(form.UrlImage)|filter(e => e.message != "This value should be of type float.")|filter(e => e.message != "This value should be of type integer.") %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    {{ form_errors(form.UrlImage) }}
+                </div>
+            {% endif %}
+		</div>
+        <button type="submit" class="btn btn-success mt-3">Ajouter</button>
+     {{ form_end(form) }}
+	 <div  class="mt-5" style="font-size:20px;"> <a href="{{ path('livrePDF') }}"  class="btn btn-outline-primary mb-4" >retour livre PDF</a></div>
+    </div>
+   
+{% endblock %}

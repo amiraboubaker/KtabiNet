@@ -1,0 +1,32 @@
+controllers:
+  resource: ../src/Controller/
+  type: annotation
+
+kernel:
+  resource: ../src/Kernel.php
+  type: annotation
+
+dashboard:
+  path: /dashboard  
+  controller: App\Controller\DashboardController::index
+
+
+save_message:
+    path: /save-message
+    controller: App\Controller\SaveMessageController::save
+    methods: POST
+
+
+errors:
+  path: /{fallbackRoute}
+  controller: App\Controller\ErrorController::fallbackRoute
+  requirements:
+    fallbackRoute: ".*"
+
+test_not_found:
+  path: /test-not-found
+  controller: 'App\Controller\ErrorController::handleNotFoundError'
+
+test_internal_error:
+  path: /test-internal-error
+  controller: 'App\Controller\ErrorController::handleInternalError'

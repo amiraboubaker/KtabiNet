@@ -1,0 +1,60 @@
+{% extends "./AdminBase.html.twig" %}
+
+{% block title %}Liste des clients
+{% endblock %}
+
+{% block mainContent %}
+	<div class="container mt-4" style="overflow: auto; height:89vh ; width: 100%;">
+		<h1>Liste des clients</h1>
+		<br>
+		<table class="table table-hover" id="example">
+			<thead>
+				<tr>
+					<th scope="col" class="col-1">Id</th>
+					<th scope="col" class="col-2">Email</th>
+				
+					<th scope="col" class="col-2">NomClient</th>
+					<th scope="col" class="col-2">PrenomClient</th>
+					<th scope="col" class="col-1">NumTel</th>
+					<th scope="col" class="col-2">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if clients is empty %}
+					<tr>
+						<td colspan="8">Aucun enregistrement trouvé</td>
+					</tr>
+				{% else %}
+					{% for client in clients %}
+						<tr>
+							<td>{{ client.id }}</td>
+							<td>{{ client.email }}</td>
+							
+							<td>{{ client.NomClient }}</td>
+							<td>{{ client.PrenomClient }}</td>
+							<td>{{ client.NumTel }}</td>
+							<td>
+								<div class="btn-group" role="group" aria-label="Actions">
+									<a href="{{ path('app_client_show', {'id': client.id}) }}" class="btn btn-primary">
+										<i class="fas fa-eye"></i>
+										Show
+									</a>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+
+	 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+	 <script>
+		        $(document).ready(function() {
+		            $('#example').DataTable();
+		        });
+		    </script>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\Client
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator: App\Security\ClientAuthenticator
+            logout:
+                path: app_logout
+                target: app_home
+                # where to redirect after logout
+                # target: app_any_route
+            remember_me:
+                secret: "%kernel.secret%"
+                lifetime: 604800
+                path: /
+                always_remember_me: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        #   - { path: ^/admin/dashboard, roles: ROLE_ADMIN }
+          - { path: ^/admin/edit/, roles: ROLE_ADMIN }
+          - { path: ^/add/admin, roles: ROLE_ADMIN }
+        #   - { path: ^/admin/dashboard, roles: ROLE_ADMIN }
+        #   - { path: ^/admin/dashboard, roles: ROLE_ADMIN }
+        #   - { path: ^/admin/dashboard, roles: ROLE_ADMIN }
+        #   - { path: ^/admin/dashboard, roles: ROLE_ADMIN }
+        #   - { path: ^/admin/dashboard, roles: ROLE_ADMIN }
+        #  - { path: ^/profile, roles: ROLE_USER }
+
+# Configuration spécifique aux tests
+# Utilisez la configuration définie ici lorsque vous exécutez des tests
+# Vous pouvez ajouter d'autres configurations spécifiques aux tests sous cette clé
+when@test:
+    security:
+        password_hashers:
+            # Par défaut, les hasheurs de mot de passe sont intensifs en ressources et prennent du temps.
+            # Cela est important pour générer des hachages de mots de passe sécurisés.
+            # Cependant, en tests, les hachages sécurisés ne sont pas importants, gaspillent des ressources et augmentent les temps de test.
+            # Les valeurs suivantes réduisent le facteur de travail aux valeurs les plus basses possibles.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4  # Valeur la plus basse possible pour bcrypt
+                time_cost: 3  # Valeur la plus basse possible pour argon
+                memory_cost: 10  # Valeur la plus basse possible pour argon

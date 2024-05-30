@@ -1,0 +1,115 @@
+.about-section {
+  background-image: url("/assets/images/wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 100px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.about-section h1 {
+  font-size: 6rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.about-section .paragraph {
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-align: left;
+}
+
+.about-text .paragraph {
+  font-size: 1.2rem;
+}
+
+.about-container {
+  width: 50%;
+  max-width: 500px;
+}
+
+.about-container h1,
+.about-container p {
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  font-family: "Poppins", sans-serif;
+}
+
+.about-container img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.services .card {
+  width: calc(33.33% - 30px);
+  margin: 15px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.services .card img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.services .card-title {
+  color: #343a40;
+}
+
+.services .card-text {
+  color: #6c757d;
+}
+
+.team-members {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.team-members .card {
+  width: calc(33.33% - 30px);
+  margin: 15px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.team-members .card img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.team-members .card-title {
+  color: #343a40;
+}
+
+.team-members .card-text {
+  color: #6c757d;
+}
+
+footer {
+  background-color: #a5774a;
+  padding: 10px 0;
+  text-align: left;
+}
+
+.social-icon {
+  color: #fff;
+  font-size: 24px;
+  margin: 0 10px;
+}
+
+.social-icon:hover {
+  color: #dfd5d5;
+}

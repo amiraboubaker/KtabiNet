@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login - Centered Form{% endblock %}
+
+{% block body %}
+<div class="login-container d-flex justify-content-center align-items-center min-vh-80">
+  <div class="card shadow-sm border-light rounded-lg w-md-70"  style="width: 500px; height: 50vh; padding: 0px 30px">
+    <div class="card-body">
+      <h1 class="h1 mb-5 text-center font-weight-bold">Login</h1>
+
+
+      <form method="post">
+        <div class="form-group mb-3">
+          <label for="inputEmail">Email</label>
+          <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="inputPassword">Password</label>
+          <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        </div>
+
+    
+
+      {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      {% endif %}
+
+ 
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <button class="btn btn-lg btn-primary btn-block mt-5" type="submit">Log In</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+<style>
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;  /* Set minimum height for full viewport */
+  
+	height: 85vh;
+   border: 1px solid black;
+
+
+   margin-right: 80px;
+   margin-left: 80px;
+   background-image: url('/assets/images/image 2.jpg');
+  background-size: cover; /* Pour couvrir tout le div */
+    background-position: center;
+    background-repeat: no-repeat;
+  }        
+</style>
+{% endblock %}

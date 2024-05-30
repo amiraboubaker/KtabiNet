@@ -1,0 +1,247 @@
+{% extends "./clientbase.html.twig" %}
+{% block body %}
+       
+
+<style>
+
+
+</style>
+
+
+
+
+
+    <div class='dashboard'>
+        <div class="dashboard-nav">
+            <header>
+                <a href="#!" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a href="#" class="brand-logo">
+               
+                    <span>CHAT</span>
+                </a>
+            </header>
+            <nav class="dashboard-nav-list">
+                <a href="{{ path('app_home') }}" class="dashboard-nav-item">
+                    Home </a>
+                    
+              
+            </nav>
+        </div>
+        <div class='dashboard-app'>
+            <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
+            <div class='dashboard-content'>
+                
+              
+                        <div class="chat-history" id="chat-history">
+                            <div class="message received">
+                                <div class="message-content">
+                                    <p>Hi</p>
+                                </div>
+                            </div>
+                            <div class="message received">
+                                <div class="message-content">
+                                    <p>How can i help you today?</p>
+                                </div>
+                            </div>                            
+                            <!-- Other messages can be added here -->
+                        </div>
+                        <div class="chat-input">
+                            
+                            <button id="startButton">Démarrer la reconnaissance vocale</button>
+                        </div>
+                        
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+    // Vérifier si l'API de reconnaissance vocale est prise en charge par le navigateur
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+        // Créer un objet de reconnaissance vocale
+        var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+        // Définir la langue de reconnaissance vocale
+        recognition.lang = 'en-US';
+
+        // Définir le mode de reconnaissance continue
+        recognition.continuous = true;
+
+        // Tableau pour stocker les valeurs
+        var values = [];
+
+        // Événement déclenché lorsqu'un résultat vocal est détecté
+        recognition.onresult = function(event) {
+            var transcriptions = Array.from(event.results)
+                .map(result => result[0].transcript.toLowerCase());
+
+            console.log('Résultats de la reconnaissance vocale :', transcriptions);
+            
+
+            // Ajouter les nouvelles valeurs au tableau
+            values = values.concat(transcriptions);	
+			processUserRequest(transcriptions);       
+        };
+
+        // Événement déclenché lorsqu'il y a une erreur dans la reconnaissance vocale
+        recognition.onerror = function(event) {
+            console.error('Erreur de reconnaissance vocale :', event.error);
+        };
+
+        // Associer l'événement de démarrage de la reconnaissance vocale au bouton
+        document.getElementById('startButton').addEventListener('click', function() {
+            // Démarrer la reconnaissance vocale
+            recognition.start();
+        });
+		 // Fonction pour traiter la demande de l'utilisateur
+        function processUserRequest(request) {
+            // Environnement fictif - utilisez une vraie bibliothèque ou API de NLP dans un environnement de production
+            var response = fakeNlpProcessing(request);
+            if (response !== false){
+                CreateMessage(request[request.length-1]);
+            }else{
+                CreateBotMessage("To search for synonyms, simply say: synonym of (the word you want synonyms for),");
+                CreateBotMessage("To search for Antonyms, simply say: Antonym of (the word you want Antonyms for).");
+            }
+           
+
+
+        }
+
+
+
+        // Fonction pour obtenir les synonymes d'un mot
+        function getSynonyms(word) {      
+
+            var response = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+            fetch(response).then(responses =>
+            responses.json().then(data=>{
+                try{
+                    for( let words of data){
+                        let definition = words.meanings;
+                        CreateBotMessage("**********************************");
+                        for (let i=0;i<definition.length;i++){
+                            
+                            CreateBotMessage("Part Of Speech: <br> "+definition[i].partOfSpeech);
+                            if (definition[i].definitions[0].definition !== undefined)
+                            CreateBotMessage("Definition: <br> "+definition[i].definitions[0].definition);
+                            if (definition[i].definitions[0].example !== undefined)
+                            CreateBotMessage("Exemple: <br> "+definition[i].definitions[0].example);
+                            CreateBotMessage("**********************************");                         
+                        }
+                    
+                    }
+                }catch(err){
+                    console.log("pas de reponse");
+                }
+            }))       
+        }
+
+        // Fonction pour obtenir les antonymes d'un mot
+        function getAntonyms(word) {
+            var response = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+            let exist = false;
+            fetch(response).then(responses =>
+            responses.json().then(data=>{
+                try{
+                    for( let words of data){
+                    let definition = words.meanings[0].antonyms;
+                    let definition1 = words.meanings;
+                    console.log(definition1);
+                       for (let i=0;i<definition1.length;i++){
+                            if (definition1[i].antonyms !== undefined && definition1[i].antonyms.length !== 0){
+                               console.log(definition1[i].antonyms);
+                                CreateBotMessage("Antonyms: <br> "+definition1[i].antonyms);
+                                exist = true;
+                            }
+                        }
+                    if (definition.length === 0){
+                     
+                        if (!exist)
+                            CreateBotMessage("Sorry there is no antonyms for this word");
+                    }else{
+                        CreateBotMessage(definition);
+                    }
+                    
+                    }
+                }catch(err){
+                    console.log("pas de reponse");
+                }
+            }))       
+                
+        }
+
+        // Fonction fictive pour le traitement du langage naturel
+        function fakeNlpProcessing(request, res) {
+            let message = request[request.length-1];
+            if (message.includes('synonym')) {
+                const word = message.replace('synonym of', '').trim();
+                
+                return getSynonyms(word);
+
+            } else if (message.includes('antonym')) {
+                const word = message.replace('antonym of', '').trim();
+                return getAntonyms(word); 
+
+            } else {
+                return false;
+            }
+        }               
+        
+        function CreateMessage(request){
+            // Création de l'élément <p> avec le texte
+
+            const pElement = document.createElement('p');
+            pElement.innerHTML = request;
+
+
+            // Création de l'élément <div> avec la classe "message-content" et ajout de l'élément <p> à l'intérieur
+            const messageContentDiv = document.createElement('div');
+            messageContentDiv.classList.add("message");
+            messageContentDiv.classList.add("sent");
+            messageContentDiv.appendChild(pElement);
+ 
+            // Sélection de la div avec la classe "message received" et ajout de l'élément <div> construit à l'intérieur
+            const receivedMessageDiv = document.getElementById('chat-history');
+            receivedMessageDiv.appendChild(messageContentDiv);
+            // Pour faire défiler automatiquement vers le bas lorsqu'un nouveau message est ajouté
+            receivedMessageDiv.scrollTop = receivedMessageDiv.scrollHeight;
+
+     
+        }
+
+          function CreateBotMessage(request){
+            // Création de l'élément <p> avec le texte
+
+            const pElement = document.createElement('p');
+            pElement.innerHTML = request;
+
+
+            // Création de l'élément <div> avec la classe "message-content" et ajout de l'élément <p> à l'intérieur
+            const messageContentDiv = document.createElement('div');
+            messageContentDiv.classList.add("message");
+            messageContentDiv.classList.add("received");
+            messageContentDiv.appendChild(pElement);
+ 
+            // Sélection de la div avec la classe "message received" et ajout de l'élément <div> construit à l'intérieur
+            const receivedMessageDiv = document.getElementById('chat-history');
+            receivedMessageDiv.appendChild(messageContentDiv);
+            // Pour faire défiler automatiquement vers le bas lorsqu'un nouveau message est ajouté
+            receivedMessageDiv.scrollTop = receivedMessageDiv.scrollHeight;
+
+     
+        }
+
+
+    } else {
+        alert("L'API de reconnaissance vocale n'est pas prise en charge par votre navigateur.");
+    }
+</script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

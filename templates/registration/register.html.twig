@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="register-container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-sm border-light rounded-lg w-md-100">
+    <div class="card-body" style="width:500px">
+      <h1 class="h3 mb-3 text-center font-weight-normal">Register</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+         <div class="form-group">
+        {{ form_row(registrationForm.email, {'attr':{'class':' form form-control'}}) }}
+         
+        
+        {{ form_row(registrationForm.NomClient,{'attr':{'class':' form form-control'}}) }}
+        {{ form_row(registrationForm.PrenomClient,{'attr':{'class':' form form-control'}}) }}
+        {{ form_row(registrationForm.NumTel,{'attr':{'class':' form form-control'}}) }}
+        {{ form_row(registrationForm.Adress,{'attr':{'class':' form form-control'}}) }}
+        {{ form_row(registrationForm.password, {
+            label: 'Password','attr':{'class':' form form-control'}
+        }) }}
+        
+        </div>
+        <button type="submit" class="btnbtn btn-lg btn-primary btn-block">Register</button>
+    {{ form_end(registrationForm) }}
+    <style>
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px0vh;  /* Set minimum height for full viewport */
+  
+	
+   border: 1px solid black;
+   margin-top: 100px;
+   margin-bottom: 100px;
+   margin-right: 80px;
+   margin-left: 80px;
+   background-image: url('/build/image/image 2.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+    }
+    </style>
+{% endblock %}

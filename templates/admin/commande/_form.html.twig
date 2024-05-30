@@ -1,0 +1,42 @@
+{% extends 'AdminBase.html.twig' %}
+{% block mainContent %}
+
+	<div class="card mt-4 p-5" style="overflow: auto; height:70vh ; width: 80%; padding: 50px; margin: 250px 10% ;">
+
+		{{ form_start(form) }}
+		<div class="form-group">
+			{{ form_label(form.DateCommande) }}
+			{{ form_widget(form.DateCommande, {'attr': {'class': 'form-control '}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.idClient) }}
+			{{ form_widget(form.idClient, {'attr': {'class': 'form-control  border-b-2 border-secondary '}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.prixTotal) }}
+			{{ form_widget(form.prixTotal, {'attr': {'class': 'form-control  border-b-2 border-secondary '}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.NbreLivres) }}
+			{{ form_widget(form.NbreLivres, {'attr': {'class': 'form-control  border-b-2 border-secondary ', 'readonly': 'readonly'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.etat) }}
+			{{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<button type="submit" class="btn btn-primary">{{ button_label|default('Update') }}</button>
+		{{ form_end(form) }}
+		<div class="container mt-4" style=" width: 100%;">
+			<div class="row ">
+				<div class="col-md-6">
+					<a href="{{ path('app_commande_index') }}">back to list</a>
+				</div>
+				<div class="col-md-6 text-right">
+					{{ include('admin/commande/_delete_form.html.twig') }}
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+{% endblock %}

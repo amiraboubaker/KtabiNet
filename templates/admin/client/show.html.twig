@@ -1,0 +1,46 @@
+{% extends './AdminBase.html.twig' %}
+
+{% block title %}Client
+{% endblock %}
+
+{% block mainContent %}
+	<h1>Client</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ client.id }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ client.email }}</td>
+			</tr>
+			<tr>
+				<th>Roles</th>
+				<td>{{ client.roles ? client.roles|json_encode : '' }}</td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td>{{ client.password }}</td>
+			</tr>
+			<tr>
+				<th>NomClient</th>
+				<td>{{ client.NomClient }}</td>
+			</tr>
+			<tr>
+				<th>PrenomClient</th>
+				<td>{{ client.PrenomClient }}</td>
+			</tr>
+			<tr>
+				<th>NumTel</th>
+				<td>{{ client.NumTel }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_client_index') }}">back to list</a>
+
+
+	{{ include('admin/client/_delete_form.html.twig') }}
+{% endblock %}

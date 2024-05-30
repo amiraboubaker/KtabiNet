@@ -1,0 +1,6 @@
+.custom-error-style {
+    color: red; /* Couleur du texte en rouge */
+    list-style: none; /* Supprime les puces de la liste */
+    margin: 0; /* Supprime la marge par défaut */
+    padding: 0; /* Supprime le rembourrage par défaut */
+}

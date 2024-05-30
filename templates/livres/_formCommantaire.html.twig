@@ -1,0 +1,81 @@
+{# _formCommantaire.html.twig #}
+
+{{ form_start(commentForm) }}
+
+<div class="form-group">
+    {{ form_label(commentForm.contenue, 'Content', {'label_attr': {'class': 'control-label'}}) }}
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-comment"></i></span>
+        </div>
+        {{ form_widget(commentForm.contenue, {'attr': {'class': 'form-control', 'placeholder': 'Enter your comment'}}) }}
+    </div>
+    {{ form_errors(commentForm.contenue) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(commentForm.evaluation, 'Rating') }}
+    <div class="star-rating">
+        {% for i in 1..5 %}
+            <span class="star" data-value="{{ i }}">
+                ★
+            </span>
+        {% endfor %}
+        {{ form_widget(commentForm.evaluation, {'attr': {'style': 'display:none;' }}) }}
+    </div>
+    {{ form_errors(commentForm.evaluation) }}
+</div>
+
+<button type="submit" class="btn btn-success">Submit Comment</button>
+
+{{ form_end(commentForm) }}
+
+<script>
+    // JavaScript to handle star rating selection
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.querySelector('#{{ commentForm.evaluation.vars.id }}');
+
+        stars.forEach(function(star) {
+            star.addEventListener('click', function() {
+                const value = parseInt(this.getAttribute('data-value'));
+                ratingInput.value = value;
+                
+                // Remove active class from all stars
+                stars.forEach(function(s) {
+                    s.classList.remove('active');
+                });
+
+                // Add active class to clicked star and previous stars
+                for (let i = 0; i < value; i++) {
+                    stars[i].classList.add('active');
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    .star-rating {
+        display: flex;
+        
+        align-items: center;
+    }
+
+    .star {
+        cursor: pointer;
+        font-size: 24px;
+        color: gray;
+        margin: 0 2px;
+    }
+
+    .star.active {
+        color: gold;
+    }
+
+    .input-group-prepend .input-group-text {
+        background-color: #f8f9fa;
+        border-color: #ced4da;
+        color: #495057;
+    }
+</style>

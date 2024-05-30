@@ -1,0 +1,15 @@
+{% extends "./clientBase.html.twig" %}
+{% block title %}page contact{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1>Demande de {{contact.fullName }}</h1>
+<p>Email : {{ contact.email}}</p>
+<p>Sujet : {{contact.sujet }}</p>
+<p>Message :</p>
+<div>
+{{contact.message |raw }}
+</div>
+</div>
+
+{% endblock %}
